@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import netscape.javascript.JSObject;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,9 +13,23 @@ import java.util.ArrayList;
 public class HttpFundamental {
     public static void main(String[] args) {
         JSONParser parser = new JSONParser();
+        Gson gson = new Gson();
+        String js= gson.toJson(new Posts(101,2,"hi","hello"));
         HttpClient client = HttpClient.newHttpClient();
+        try {
+            HttpRequest postRequest = HttpRequest.newBuilder().
+            header("content-type","application/json").
+                    POST(HttpRequest.BodyPublishers.ofString(js)).
+                    uri(new URI("https://jsonplaceholder.typicode.com/posts")).build();
+            HttpResponse httpResponse = client.send(postRequest, HttpResponse.BodyHandlers.ofString());
+            System.out.println(httpResponse);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
 
-        try{
+
+            try{
             HttpRequest getRequest = HttpRequest.newBuilder().
                     GET().
                     uri(new URI("https://jsonplaceholder.typicode.com/posts")).build();
