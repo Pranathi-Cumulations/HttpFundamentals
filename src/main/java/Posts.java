@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Posts {
     private long userId;
     private long id;
@@ -45,5 +47,17 @@ public class Posts {
 
     public void setBody(String body) {
         this.body = body;
+    }
+}
+
+class PostsList{
+    ArrayList<Posts> allPosts = new ArrayList<>();
+
+    public ArrayList<Posts> getAllPosts() {
+        return allPosts;
+    }
+
+    public void setAllPosts(ArrayList<Posts> allPosts) {
+        this.allPosts = allPosts;
     }
 }
